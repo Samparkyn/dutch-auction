@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 export const Buyer = () => {
   return (
-    <div className="home">
+    <div className="buyer">
       <p className="buyer-text">What would you like to buy? These are the current active auctions </p>
       <div className="items__container">
         <div>
