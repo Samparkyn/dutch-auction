@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 
 class AppState extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-     
+    state = {
+     auctions: "I am an auction",
+     auctionTime: 5
     };
-    this.setAppState = this.setAppState.bind(this);
-  }
+  
 
-  setAppState(updater, callback) {
+  setAppState = (updater, callback) => {
     this.setState(updater, () => {
       if (this.props.debug) {
         console.log('setAppState', JSON.stringify(this.state));
@@ -22,7 +20,7 @@ class AppState extends Component {
 
   render() {
     return (
-      <div className="AppState">
+      <div className="app-state">
         {React.Children.map(this.props.children, child => {
           return React.cloneElement(child, {
             appState: this.state,

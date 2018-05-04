@@ -7,20 +7,29 @@ import {
 import { Home } from './pages/home'
 import { Buyer } from './pages/buyer'
 import { Seller } from './pages/seller'
+import { Item } from './components/item'
 
 import './App.css';
 
-export const App = () => (
+export default class App extends Component {
+  render(){
+    const { appState, setAppState } = this.props;
+    return (
       <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Welcome to the Dutch Auction!</h1>
-        </header>
-        <Router>
-          <div>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/buy" component={Buyer} />
-            <Route exact path="/sell" component={Seller} />
-          </div>
-        </Router>
-      </div>
-  )
+      <header className="App-header">
+        <h1 className="App-title">Welcome to the Dutch Auction!</h1>
+      </header>
+      <Router>
+        <div>
+          <Route exact path="/" component={Home} />
+          <Route
+           exact path="/buy"
+           render={(props) => ( <Buyer {...this.props} />)}
+          />
+          <Route exact path="/sell" component={Seller} />
+        </div>
+      </Router>
+    </div>
+    )
+  }   
+}
