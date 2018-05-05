@@ -26,7 +26,9 @@ export default class App extends Component {
            exact path="/buy"
            render={(props) => ( <Buyer {...this.props} />)}
           />
-          <Route exact path="/sell" component={Seller} />
+          <Route 
+            exact path="/sell"
+            render={(props) => ( <Seller {...this.props} />)} />
         </div>
       </Router>
     </div>

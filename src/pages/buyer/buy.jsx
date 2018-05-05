@@ -13,6 +13,9 @@ export const Buyer = (props) => {
         <Link className="btn__link" to="/finished-auctions">
           <button className="btn">Show me</button>
         </Link>
+        <Link className="btn__link" to="/">
+          <button className="btn">Go back</button>
+        </Link>
       </div>
     </div>
   )
