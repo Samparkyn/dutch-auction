@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class AppState extends Component {
     state = {
-     auctions: "I am an auction",
+     auctions: ['auction1'],
      auctionTime: 5
     };
   

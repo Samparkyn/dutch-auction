@@ -7,7 +7,7 @@ import {
 import { Home } from './pages/home'
 import { Buyer } from './pages/buyer'
 import { Seller } from './pages/seller'
-import { Item } from './components/item'
+import { ItemsList } from './components/itemsList'
 
 import './App.css';
 
