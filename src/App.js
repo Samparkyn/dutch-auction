@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
 import {
   BrowserRouter as Router,
-  Route,
-  Link
+  Route
 } from 'react-router-dom'
 import { Home } from './pages/home'
 import { Buyer } from './pages/buyer'
 import { Seller } from './pages/seller'
-import { ItemsList } from './components/itemsList'
 
 import './App.css';
 
 export default class App extends Component {
   render(){
-    const { appState, setAppState } = this.props;
+    console.log('App.js props', this.props);
+    
     return (
       <div className="App">
       <header className="App-header">

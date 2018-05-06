@@ -9,24 +9,18 @@ export class Seller extends Component {
 
   addItem = (e) => {
     e.preventDefault();
-    const newItem = [
-      this.state.itemTitle,
-      this.state.startPrice
-
-    ];
+    const newItem = {
+      itemTitle: this.state.itemTitle,
+      startPrice: this.state.startPrice
+    };
       
-
-    // this.props.setAppState({
-    //   auctionItems: [...this.props.appState.auctionItems, newItem[0]]
-    // });
-    this.props.setAppState(prevState => ({
-      auctionItems: [...prevState.auctionItems, newItem]
+    this.props.setAppState( ({
+      auctionItems: [...this.props.appState.auctionItems, newItem]
   }))
-    console.log('seller page new item', newItem)
+    console.log('/seller new item', newItem)
   }
 
   render() {
-    const { itemTitle, startPrice } = this.state
 
     return (
       <div className="seller">

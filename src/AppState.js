@@ -2,7 +2,12 @@ import React, { Component } from 'react';
 
 class AppState extends Component {
     state = {
-     auctionItems: [],
+     auctionItems: [
+       {
+          itemTitle: 'name',
+          startPrice:'400'
+        }
+      ],
      auctionTime: 5
     };
   
