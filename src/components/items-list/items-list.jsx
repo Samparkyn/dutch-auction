@@ -10,15 +10,15 @@ export class ItemsList extends Component {
           <table>
             <thead>
               <tr>
-                <td>Name</td>
+                <td>Title</td>
                 <td>Price</td>
                 <td>Time remaining</td>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>{item.name}</td>
-                <td>WAKANDA $$ {item.price}</td>
+                <td>{item.title}</td>
+                <td>{item.price}</td>
                 <td><Timer start={item.start} duration={item.duration}/></td>
               </tr>
             </tbody>

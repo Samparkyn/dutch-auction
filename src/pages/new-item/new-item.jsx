@@ -60,6 +60,7 @@ export class NewItem extends Component {
             placeholder="Title...">
           </input>
           <input
+            value={startPrice}
             type="number"
             name="price"
             onChange={this.priceHandler}
