@@ -1,31 +1,15 @@
 import React, { Component } from 'react'
-import { Timer } from '../timer'
+import { ItemRow } from '../item-row'
+import { Link } from 'react-router-dom'
 
 export class ItemsList extends Component {
   render() {
     const { items } = this.props
-    const rows = items.map(item => {
-      return (
-        <li key={item.id}>
-          <table>
-            <thead>
-              <tr>
-                <td>Title</td>
-                <td>Price</td>
-                <td>Time remaining</td>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>{item.title}</td>
-                <td>{item.price}</td>
-                <td><Timer start={item.start} duration={item.duration}/></td>
-              </tr>
-            </tbody>
-          </table>
-        </li>
-      )
-    })
+    const rows = items.map(item => (
+      <Link key={item.id} to={`/item/${item.id}`}>
+        <ItemRow item={item} />
+      </Link>
+    ))
 
     return (
       <ul className="items__list">
