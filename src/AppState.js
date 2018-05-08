@@ -2,27 +2,46 @@ import React, { Component } from 'react';
 
 class AppState extends Component {
     state = {
-     auctionItems: [
-       {
-          itemTitle: 'name',
-          startPrice:'400',
-          startTimer: ''
-        }
-      ],
-     auctionTime: 10
+      items: [],
+      username: ''
     };
   
-
-  setAppState = (updater, callback) => {
-    this.setState(updater, () => {
-      if (this.props.debug) {
-        console.log('setAppState', JSON.stringify(this.state));
-      }
-      if (callback) {
-        callback();
-      }
-    });
+  setAppState = (newState) => {
+    this.setState(newState)
   }
+
+  createNewItem = (item) => {
+    this.setState(prevState => ({
+      items: [...prevState.items, item]
+    }), () => {
+      setTimeout(() => {
+        this.endItemAuction(item)
+      }, item.duration);
+    })
+  }
+
+
+  setBidOnItem = (itemId, price) => {
+    const { username, items } = this.state
+
+    const bid = {
+      price,
+      user: username
+    }
+
+    const item = this.state.items.find(i => i.id === itemId)
+  }
+
+
+  endItemAuction = (item) => {
+    const { items } = this.state
+    const itemIdx = items.find(i => i.id === item.id)
+    const newItem = this.state.items[itemIdx]
+    newItem.active = false
+    const newItems = items.splice(itemIdx, 1, newItem)
+    this.setState({ items: newItems })
+  }
+
 
   render() {
     return (

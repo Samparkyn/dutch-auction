@@ -1,24 +1,30 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { constants } from '../../utils/constants'
 
 export class Seller extends Component {
-  state = {
-    itemTitle: '',
-    startPrice: ''
-  }
-
   addItem = (e) => {
     e.preventDefault();
     const newItem = {
-      itemTitle: this.state.itemTitle,
-      startPrice: this.state.startPrice
+      id: Date.now(),
+      bids: [],
+      start: Date.now(),
+      active: true,
+      title: this.titleRef.value,
+      startPrice: this.priceRef.value,
+      duration: constants.DEFAULT_AUCTION_TIME
     };
+
+    setTimeout(() => {
       
-    this.props.setAppState( ({
+    }, newItem.duration);
+
+    this.props.setAppState({
       auctionItems: [...this.props.appState.auctionItems, newItem]
-  }))
-    console.log('/seller new item', newItem)
+    })
   }
+  
+  setTitleRef = (el) => this.titleRef = el;
+  setPriceRef = (el) => this.priceRef = el;
 
   render() {
 
@@ -26,30 +32,26 @@ export class Seller extends Component {
       <div className="seller">
         <p className="seller__text">What would you like to sell? Create your item here: </p>
         <div className="newItem__form__container">
-          <form onSubmit={this.addItem}>
-            <label>
-              Item title:
-              <input 
-                type="text" 
-                name="title" 
-                onChange={(e) => this.setState({ itemTitle: e.target.value })}
-                placeholder="Title..">
-              </input>
-            </label>
-            <label>
-              Start price:
-              <input type="text"
+          <label>
+            Item title:
+            <input 
+              type="text" 
+              name="title" 
+              ref={this.setTitleRef}
+              placeholder="Title...">
+            </input>
+          </label>
+          <label>
+            Start price:
+            <input
+              type="number"
               name="price"
-              onChange={(e) => this.setState({ startPrice: e.target.value })}
-              placeholder="Start price..">
-              </input>
-            </label>
-            <input type="submit" value="Submit" />
-          </form>
+              ref={this.setPriceRef}
+              placeholder="Start price...">
+            </input>
+          </label>
+          <button onClick={this.addItem}>Save</button>
         </div>
-        <Link className="btn__link" to="/">
-          <button className="btn">Go back</button>
-        </Link>
       </div>
     )
   }
