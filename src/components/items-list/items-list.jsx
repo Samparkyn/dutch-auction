@@ -18,7 +18,7 @@ export class ItemsList extends Component {
             <tbody>
               <tr>
                 <td>{item.name}</td>
-                <td>{item.price}</td>
+                <td>WAKANDA $$ {item.price}</td>
                 <td><Timer start={item.start} duration={item.duration}/></td>
               </tr>
             </tbody>

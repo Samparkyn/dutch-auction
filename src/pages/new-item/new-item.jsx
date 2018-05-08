@@ -30,6 +30,7 @@ export class NewItem extends Component {
       id: Date.now(),
       bids: [],
       title,
+      price: startPrice,
       startPrice,
       start: Date.now(),
       active: true,
