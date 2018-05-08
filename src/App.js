@@ -12,7 +12,7 @@ import './App.css';
 export default class App extends Component {
   render(){
     console.log('App.js props', this.props);
-    
+
     return (
       <div className="App">
       <header className="App-header">

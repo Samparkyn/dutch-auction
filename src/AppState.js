@@ -5,10 +5,11 @@ class AppState extends Component {
      auctionItems: [
        {
           itemTitle: 'name',
-          startPrice:'400'
+          startPrice:'400',
+          startTimer: ''
         }
       ],
-     auctionTime: 5
+     auctionTime: 10
     };
   
 

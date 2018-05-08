@@ -1,0 +1,11 @@
+.item__container {
+display: block;
+}
+
+.list__item {
+  height: 150px;
+  width: 150px;
+  border: solid 1px black;
+  list-style: none;
+  display: inline-block
+}

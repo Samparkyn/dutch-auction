@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { ItemsList } from '../../components/itemsList/'
 
 export const Buyer = (props) => {
-  console.log('buyer', props)
+  // console.log('buyer', props)
   return (
     <div className="buyer">
       <p className="buyer-text">What would you like to buy? These are the current active auctions </p>
