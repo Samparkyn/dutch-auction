@@ -17,16 +17,16 @@ class AppState extends Component {
   setItemPriceDecreaseTimeout = (item) => {
     // convert Miliseconds to Minutes
     const totalMinutes = Math.floor(item.duration / 1000 / 60)
-    for (let minute = totalMinutes; m > 0; m--) {
+    for (let minute = totalMinutes; minute > 0; minute--) {
       setTimeout(() => {
-        decreaseItemPrice(item)
+        this.decreaseItemPrice(item)
       }, 60 * 1000);
     }
   }
 
 
-  getWinningBid = (item) => {
-    const winningBid = currItem.bids
+  getWinningBid = (item, newPrice) => {
+    const winningBid = item.bids
       .filter((bid) => bid.price >= newPrice) // get winning bids
       .sort((bidA, bidB) => bidA.price - bidB.price) // sort by bid price
       .filter((bid, idx, allBids) => bid.price !== allBids[0].price) // remove lowest bids - keep duplicate ones
@@ -44,12 +44,12 @@ class AppState extends Component {
     const itemIdx = this.getItemIdx(item)
     const newItems = this.getNewItems()
 
-    const newItem = newItems[currItemIdx]
-    const newPrice = currItem.price - (currItem.price * 0.2)
-    const winningBid = this.getWinningBid(currItem)
+    const newItem = newItems[itemIdx]
+    const newPrice = newItem.price - (newItem.price * 0.2)
+    const winningBid = this.getWinningBid(newItem, newPrice)
 
     if (winningBid) {
-      this.setItemWinner(currItemIdx, winningBid)
+      this.setItemWinner(itemIdx, winningBid)
       return
     }
 
@@ -131,12 +131,14 @@ class AppState extends Component {
 
 
   render() {
+    console.log('appState render: items =>', this.state.items)
     return (
       <div className="app-state">
         {React.Children.map(this.props.children, child => {
           return React.cloneElement(child, {
-            appState: this.state,
-            setAppState: this.setAppState
+            items: this.state.items,
+            createNewItem: this.createNewItem,
+            setBidOnItem: this.setBidOnItem
           });
         })}
       </div>

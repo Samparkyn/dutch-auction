@@ -1,18 +1,17 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { ItemsList } from '../../components/items-list'
 
-export const Home = () => {
+export const Home = (props) => {
+  console.log({ props })
   return (
     <div className="home">
-      <p className="intro-text">Are you a: </p>
       <div className="btn__container">
-        <Link className="btn__link__buyer" to="/buy">
-          <button className="btn">Buyer</button>
-        </Link>
-        <p>Or</p>
-        <Link className="btn__link__seller" to="/sell">
+        <Link to="/new-item">
           <button className="btn">Seller</button>
         </Link>
+        <h2>All items</h2>
+        <ItemsList items={props.items} />
       </div>
     </div>
   )
