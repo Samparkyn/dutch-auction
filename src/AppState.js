@@ -1,44 +1,131 @@
 import React, { Component } from 'react';
 
 class AppState extends Component {
-    state = {
-      items: [],
-      username: ''
-    };
+  state = {
+    items: [],
+    username: ''
+  };
   
-  setAppState = (newState) => {
-    this.setState(newState)
+
+  setItemEndTimeout = (item) => {
+    setTimeout(() => {
+      this.endItemAuction(item)
+    }, item.duration);
   }
+
+
+  setItemPriceDecreaseTimeout = (item) => {
+    // convert Miliseconds to Minutes
+    const totalMinutes = Math.floor(item.duration / 1000 / 60)
+    for (let minute = totalMinutes; m > 0; m--) {
+      setTimeout(() => {
+        decreaseItemPrice(item)
+      }, 60 * 1000);
+    }
+  }
+
+
+  getWinningBid = (item) => {
+    const winningBid = currItem.bids
+      .filter((bid) => bid.price >= newPrice) // get winning bids
+      .sort((bidA, bidB) => bidA.price - bidB.price) // sort by bid price
+      .filter((bid, idx, allBids) => bid.price !== allBids[0].price) // remove lowest bids - keep duplicate ones
+      .sort((bidA, bidB) => bidA.start - bidB.start) // get the first highest bid
+    
+    if (winningBid.length) {
+      return winningBid[0]
+    }
+
+    return null
+  }
+
+
+  decreaseItemPrice = (item) => {
+    const itemIdx = this.getItemIdx(item)
+    const newItems = this.getNewItems()
+
+    const newItem = newItems[currItemIdx]
+    const newPrice = currItem.price - (currItem.price * 0.2)
+    const winningBid = this.getWinningBid(currItem)
+
+    if (winningBid) {
+      this.setItemWinner(currItemIdx, winningBid)
+      return
+    }
+
+    newItem.price = newPrice
+    this.setState({ items: newItems })
+  }
+
 
   createNewItem = (item) => {
     this.setState(prevState => ({
       items: [...prevState.items, item]
     }), () => {
-      setTimeout(() => {
-        this.endItemAuction(item)
-      }, item.duration);
+      this.setItemEndTimeout(item)
+      this.setItemPriceDecreaseTimeout(item)
     })
   }
 
 
-  setBidOnItem = (itemId, price) => {
-    const { username, items } = this.state
+  setItemWinner = (itemIdx, winningBid) => {
+    const { items } = this.state
+    const currItem = items[itemIdx]
 
-    const bid = {
-      price,
-      user: username
+    const auctionAlreadyEnded = !currItem.active
+    if (auctionAlreadyEnded) {
+      return
     }
 
-    const item = this.state.items.find(i => i.id === itemId)
+    const newItems = items.slice()
+    const newItem = newItems[itemIdx]
+
+    newItem.active = false
+    newItem.winner = winningBid
+    this.setState({ items: newItems })
   }
 
 
-  endItemAuction = (item) => {
-    const { items } = this.state
-    const itemIdx = items.find(i => i.id === item.id)
-    const newItem = this.state.items[itemIdx]
+  setBidOnItem = (item, price) => {
+    const { username } = this.state
+
+    const bid = {
+      price,
+      start: Date.now(),
+      user: username
+    }
+
+    const itemIdx = this.getItemIdx(item)
+    const newItems = this.getNewItems()
+
+    const newItem = newItems[itemIdx]
+    newItem.bids.push(bid)
+
+    this.setState({ items: newItems })
+  }
+
+
+  getItemIdx = (item) => {
+    return this.state.items.findIndex(i => i.id === item.id)
+  }
+
+
+  getNewItems = () => {
+    return this.state.items.slice()
+  }
+
+
+  endItemAuction = (item) => {  
+    const itemIdx = this.getItemIdx(item)
+    const newItems = this.getNewItems()
+    const newItem = newItems[itemIdx]
+    const auctionAlreadyEnded = !newItem.active
+
+    if (auctionAlreadyEnded) {
+      return
+    }
+
     newItem.active = false
-    const newItems = items.splice(itemIdx, 1, newItem)
     this.setState({ items: newItems })
   }
 
