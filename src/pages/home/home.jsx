@@ -6,13 +6,8 @@ export const Home = (props) => {
   console.log({ props })
   return (
     <div className="home">
-      <div className="btn__container">
-        <Link to="/new-item">
-          <button className="btn">Seller</button>
-        </Link>
-        <h2>All items</h2>
-        <ItemsList items={props.items} />
-      </div>
+      <h2>All items</h2>
+      <ItemsList items={props.items} />
     </div>
   )
 }

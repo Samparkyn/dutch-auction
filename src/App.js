@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { Home } from './pages/home'
 import { Item } from './pages/item'
 import { NewItem } from './pages/new-item'
+import { Link } from 'react-router-dom'
 import './App.css';
 
 export default class App extends Component {
@@ -14,6 +15,8 @@ export default class App extends Component {
         </header>
         <Router>
           <div>
+            <Link to="/">Home</Link>
+            <Link to="/new-item">Create new listing</Link>
             <Route exact path="/" render={props => <Home {...this.props} />} />
             <Route exact path="/new-item" render={props => <NewItem {...this.props} />} />
             <Route path="/item/:id" render={props => <Item {...props} {...this.props} />} />
