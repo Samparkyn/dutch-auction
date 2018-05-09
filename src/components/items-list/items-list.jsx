@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ItemRow } from '../item-row'
+import { ItemCard } from '../item-card'
 import { Link } from 'react-router-dom'
 
 export class ItemsList extends Component {
@@ -7,7 +7,7 @@ export class ItemsList extends Component {
     const { items } = this.props
     const rows = items.map(item => (
       <Link key={item.id} to={`/item/${item.id}`}>
-        <ItemRow item={item} />
+        <ItemCard item={item} />
       </Link>
     ))
 

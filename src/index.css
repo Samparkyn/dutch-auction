@@ -1,3 +1,7 @@
+@import url('./components/items-list/items-list.css');
+@import url('./pages/new-item/new-item.css');
+@import url('./components/item-card/item-card.css');
+
 body {
   margin: 0;
   padding: 0;

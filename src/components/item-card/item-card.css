@@ -1,0 +1,17 @@
+.item__card {
+    position: relative;
+    flex: 0 0 200px;
+    min-width: 200px;
+    margin: 20px 12px;
+    background: #fff;
+    box-shadow: 2px 2px 12px 0 rgba(0,0,0,.15)
+}
+
+.item__card__link {
+  list-style: none;
+}
+
+.item__title .item__price .item__time-remaining {
+  list-style: none;
+  text-decoration-style: none;
+}
