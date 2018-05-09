@@ -1,37 +1,62 @@
 import React, { Component } from 'react';
+import { getItems, getUsername } from './utils/mock-data';
 
 class AppState extends Component {
   state = {
     items: [],
     username: ''
   };
-  
 
-  setItemEndTimeout = (item) => {
-    setTimeout(() => {
-      this.endItemAuction(item)
-    }, item.duration);
+
+  componentDidMount() {
+    this.hydrateState()
   }
 
 
-  setItemPriceDecreaseTimeout = (item) => {
+  hydrateState = () => {
+    const items = getItems()
+    items.map(i => this.createNewItem(i))
+    this.setState({
+      username: 'Sam',
+      userId: 3
+    })
+  }
+
+  setItemPriceDecreaseTimeout = (item, timeLeft) => {
     // convert Miliseconds to Minutes
-    const totalMinutes = Math.floor(item.duration / 1000 / 60)
+    const oneMinute = 60 * 1000
+    const totalMinutes = Math.floor(timeLeft / 1000 / 60)
     for (let minute = totalMinutes; minute > 0; minute--) {
       setTimeout(() => {
         this.decreaseItemPrice(item)
-      }, 60 * 1000);
+      }, oneMinute);
     }
   }
 
 
-  getWinningBid = (item, newPrice) => {
+  getWinningBid = (item, price) => {
+    console.log('getWinningBid', { item, price })
     const winningBid = item.bids
-      .filter((bid) => bid.price >= newPrice) // get winning bids
+      .map((i, idx, all) => {
+        console.log('before filter', {i, idx, all})
+        return i 
+      })
+      .filter((bid) => bid.price >= price) // get winning bids
+      .map((i, idx, all) => {
+        console.log('after first filter', {i, idx, all})
+        return i 
+      })
       .sort((bidA, bidB) => bidA.price - bidB.price) // sort by bid price
-      .filter((bid, idx, allBids) => bid.price !== allBids[0].price) // remove lowest bids - keep duplicate ones
+      .map((i, idx, all) => {
+        console.log('after first sort', {i, idx, all})
+        return i 
+      })
+      .filter((bid, _, allBids) => {
+        console.log('inside filter', { bid, allBids })
+        return bid.price !== allBids[0].price // remove lowest bids - keep duplicate ones
+      })
       .sort((bidA, bidB) => bidA.start - bidB.start) // get the first highest bid
-    
+    console.log('after filters', { winningBid, item, price })
     if (winningBid.length) {
       return winningBid[0]
     }
@@ -47,7 +72,7 @@ class AppState extends Component {
     const newItem = newItems[itemIdx]
     const newPrice = newItem.price - (newItem.price * 0.2)
     const winningBid = this.getWinningBid(newItem, newPrice)
-
+    console.log('decrease item price', { item, newPrice })
     if (winningBid) {
       this.setItemWinner(itemIdx, winningBid)
       return
@@ -62,9 +87,21 @@ class AppState extends Component {
     this.setState(prevState => ({
       items: [...prevState.items, item]
     }), () => {
-      this.setItemEndTimeout(item)
-      this.setItemPriceDecreaseTimeout(item)
+      const timeLeft = item.duration - (Date.now() - item.start)
+      if (timeLeft <= 0) {
+        return
+      }
+
+      this.setItemEndTimeout(item, timeLeft)
+      this.setItemPriceDecreaseTimeout(item, timeLeft)
     })
+  }
+
+
+  setItemEndTimeout = (item, timeLeft) => {
+    setTimeout(() => {
+      this.endItemAuction(item)
+    }, timeLeft);
   }
 
 
@@ -115,7 +152,7 @@ class AppState extends Component {
   }
 
 
-  endItemAuction = (item) => {  
+  endItemAuction = (item) => {
     const itemIdx = this.getItemIdx(item)
     const newItems = this.getNewItems()
     const newItem = newItems[itemIdx]
@@ -125,7 +162,14 @@ class AppState extends Component {
       return
     }
 
+    const winningBid = this.getWinningBid(newItem, item.price)
+    if (winningBid) {
+      this.setItemWinner(itemIdx, winningBid)
+      return
+    }
+
     newItem.active = false
+    newItem.price = 1
     this.setState({ items: newItems })
   }
 

@@ -39,7 +39,7 @@ export class NewItem extends Component {
 
     this.props.createNewItem(newItem)
   }
-  
+
 
   render() {
     const { error, title, startPrice } = this.state
@@ -50,9 +50,7 @@ export class NewItem extends Component {
 
     return (
       <div className="seller">
-        <h2>Sell</h2>
-        <p className="seller__text">What would you like to sell?</p>
-        <p className="seller__text">Create your item here: </p>
+        <p className="seller__text">What would you like to sell? Create your item here: </p>
         <div className="newItem__form__container">
           <input 
             value={title}
@@ -68,9 +66,9 @@ export class NewItem extends Component {
             onChange={this.priceHandler}
             placeholder="Start price...">
           </input>
-          <Link className="btn__link" to="/" onClick={this.addItem}>
-            <button disabled={error}>Create</button>
-          </Link>
+          <button disabled={error} onClick={this.addItem}>
+            <Link to="/">Save</Link>
+          </button>
           {errorMessage}
         </div>
       </div>
