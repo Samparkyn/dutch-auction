@@ -6,7 +6,6 @@ export const ItemCard = ({ item }) => (
     <div className="item__content">
       <p className="item__title">{item.title}</p>
       <p>Seller: {item.username}</p>
-      <p>Bids: {item.bids.length}</p>
       <p>Price: {item.price}</p>
       <p>Bids: {item.bids.length}</p>
       <span className="item_time-remaining">Time remaining:
