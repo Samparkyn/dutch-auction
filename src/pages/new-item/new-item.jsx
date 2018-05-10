@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { constants } from '../../utils/constants'
-import { Link } from 'react-router-dom'
 
 export class NewItem extends Component {
   state = {
@@ -20,7 +19,7 @@ export class NewItem extends Component {
   addItem = () => {
     const title = this.state.title
     const startPrice = parseFloat(this.state.startPrice)
-    const { history, createNewItem } = this.props
+    const { history, createNewItem, userId, username } = this.props
 
     if (!title || !startPrice) {
       this.setState({ error: 'Please complete both fields' })
@@ -33,6 +32,8 @@ export class NewItem extends Component {
       title,
       price: startPrice,
       startPrice,
+      userId,
+      username,
       start: Date.now(),
       active: true,
       duration: constants.DEFAULT_AUCTION_TIME
@@ -44,11 +45,10 @@ export class NewItem extends Component {
   
   
   render() {
-    console.log(this.props)
     const { error, title, startPrice } = this.state
 
     const errorMessage = error 
-      ? <div>{error}</div> 
+      ? <div className="error-message">{error}</div> 
       : null
 
     return (

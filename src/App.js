@@ -8,6 +8,8 @@ import './app.css'
 
 export default class App extends Component {
   render() {
+    const { toggleUser, username } = this.props
+
     return (
       <div className="App">
         <Router>
@@ -15,6 +17,10 @@ export default class App extends Component {
             <div className="app__nav">
               <Link className="nav__link" to="/">Home</Link>
               <Link className="nav__link" to="/new-item">Sell</Link>
+              <div className="app__nav__login">
+                <div>Logged in as {username}</div>
+                <button onClick={toggleUser}>Switch user</button>
+              </div>
             </div>
             <Route exact path="/" render={routerProps => <Home {...this.props} />} />
             <Route exact path="/new-item" render={routerProps => <NewItem {...routerProps} {...this.props} />} />

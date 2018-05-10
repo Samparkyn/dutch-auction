@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getItems, getUsername } from './utils/mock-data';
+import { getItems, sam, john } from './utils/mock-data';
 
 class AppState extends Component {
   state = {
@@ -16,10 +16,7 @@ class AppState extends Component {
   hydrateState = () => {
     const items = getItems()
     items.map(i => this.createNewItem(i))
-    this.setState({
-      username: 'Sam',
-      userId: 3
-    })
+    this.setState(sam)
   }
 
   setItemPriceDecreaseTimeout = (item, timeLeft) => {
@@ -134,6 +131,17 @@ class AppState extends Component {
   }
 
 
+  toggleUser = () => {
+    const { userId } = this.state
+
+    if (userId === sam.userId) {
+      this.setState(john)
+      return
+    }
+    this.setState(sam)
+  }
+
+
   endItemAuction = (item) => {
     const itemIdx = this.getItemIdx(item)
     const newItems = this.getNewItems()
@@ -157,11 +165,16 @@ class AppState extends Component {
 
 
   render() {
+    const { items, username, userId } = this.state
+
     return (
       <div className="app-state">
         {React.Children.map(this.props.children, child => {
           return React.cloneElement(child, {
-            items: this.state.items,
+            items,
+            username,
+            userId,
+            toggleUser: this.toggleUser,
             createNewItem: this.createNewItem,
             setBidOnItem: this.setBidOnItem
           });

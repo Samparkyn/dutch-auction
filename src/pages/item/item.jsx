@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 
 
 export class Item extends Component {
@@ -14,8 +13,13 @@ export class Item extends Component {
 
   placeBidHandler = () => {
     const { bidPrice } = this.state
-    const { setBidOnItem, history } = this.props
+    const { setBidOnItem, history, userId } = this.props
     const item = this.getItemFromParams()
+
+    if (item.userId === userId) {
+      this.setState({ error: 'You cannot bid on an auction you started' })
+      return
+    }
 
     if (!bidPrice) {
       this.setState({ error: 'Please set a bid amount' })
@@ -27,13 +31,18 @@ export class Item extends Component {
       return
     }
 
+    if (item.userId === userId) {
+      this.setState({ error: 'You cannot bid on an auction you started' })
+      return
+    }
+
     history.push('/')
     setBidOnItem(item, parseFloat(bidPrice))
   }
 
   getItemFromParams = () => {
     const { items, match } = this.props
-    const itemId = parseInt(match.params.id)
+    const itemId = parseInt(match.params.id, 10)
     const item = items.find(i => i.id === itemId)
     return item
   }
@@ -43,7 +52,7 @@ export class Item extends Component {
     const item = this.getItemFromParams()
 
     const errorMessage = error
-      ? <div>{error}</div>
+      ? <div className="error-message">{error}</div>
       : null
 
     const bidInput = (
