@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { getItems } from './utils/mock-data';
+import { getItems, getUsername } from './utils/mock-data';
 
 class AppState extends Component {
   state = {
     items: [],
-    username: ''
+    username: '',
   };
 
 
@@ -23,7 +23,6 @@ class AppState extends Component {
   }
 
   setItemPriceDecreaseTimeout = (item, timeLeft) => {
-    // convert Miliseconds to Minutes
     const oneMinute = 60 * 1000
     const totalMinutes = Math.floor(timeLeft / 1000 / 60)
     for (let minute = totalMinutes; minute > 0; minute--) {
@@ -35,30 +34,13 @@ class AppState extends Component {
 
 
   getWinningBid = (item, price) => {
-    console.log('getWinningBid', { item, price })
-    const winningBid = item.bids
-      .map((i, idx, all) => {
-        console.log('before filter', {i, idx, all})
-        return i 
-      })
-      .filter((bid) => bid.price >= price) // get winning bids
-      .map((i, idx, all) => {
-        console.log('after first filter', {i, idx, all})
-        return i 
-      })
-      .sort((bidA, bidB) => bidA.price - bidB.price) // sort by bid price
-      .map((i, idx, all) => {
-        console.log('after first sort', {i, idx, all})
-        return i 
-      })
-      .filter((bid, _, allBids) => {
-        console.log('inside filter', { bid, allBids })
-        return bid.price !== allBids[0].price // remove lowest bids - keep duplicate ones
-      })
-      .sort((bidA, bidB) => bidA.start - bidB.start) // get the first highest bid
-    console.log('after filters', { winningBid, item, price })
-    if (winningBid.length) {
-      return winningBid[0]
+    const validBids = item.bids.filter((bid) => bid.price >= price) // get winning bids
+    validBids.sort((bidA, bidB) => bidA.price - bidB.price) // sort by bid price
+    const winningBids = validBids.filter((bid, _, allBids) => bid.price === allBids[0].price) // keep duplicate highest bids
+    winningBids.sort((bidA, bidB) => bidA.start - bidB.start) // get the first highest bid
+
+    if (winningBids.length) {
+      return winningBids[0]
     }
 
     return null
@@ -72,7 +54,7 @@ class AppState extends Component {
     const newItem = newItems[itemIdx]
     const newPrice = newItem.price - (newItem.price * 0.2)
     const winningBid = this.getWinningBid(newItem, newPrice)
-    console.log('decrease item price', { item, newPrice })
+
     if (winningBid) {
       this.setItemWinner(itemIdx, winningBid)
       return
@@ -175,7 +157,6 @@ class AppState extends Component {
 
 
   render() {
-    console.log('appState render: items =>', this.state.items)
     return (
       <div className="app-state">
         {React.Children.map(this.props.children, child => {

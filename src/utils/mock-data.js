@@ -65,12 +65,12 @@ export const getItems = () => {
       bids: [
         {
           ...olivia,
-          price: 400,
+          price: 550,
           start: subtractTime(Date.now(), 75),
         },
         {
           ...john,
-          price: 370,
+          price: 550,
           start: subtractTime(Date.now(), 65),
         }
       ],
@@ -86,18 +86,18 @@ export const getItems = () => {
       bids: [
         {
           ...sam,
-          price: 400,
+          price: 590,
           start: subtractTime(Date.now(), 130),
         },
         {
           ...john,
-          price: 370,
+          price: 590,
           start: subtractTime(Date.now(), 135),
         }
       ],
       title: 'Head Ski boots',
-      price: 640,
-      startPrice: 600,
+      price: 600,
+      startPrice: 950,
       start: subtractTime(Date.now(), 180),
       active: true,
       duration: constants.DEFAULT_AUCTION_TIME
