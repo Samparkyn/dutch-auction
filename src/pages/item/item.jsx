@@ -74,11 +74,13 @@ export class Item extends Component {
     )
 
     return (
-      <div className="">
-        <div>{item.title}</div>
-        <div>{item.price}</div>
-        {item.active ? bidInput : auctionOverDetails}
-        {errorMessage}
+      <div className="item__page">
+        <div className="item__card">
+          <div>{item.title}</div>
+          <div>{item.price}</div>
+          {item.active ? bidInput : auctionOverDetails}
+          {errorMessage}
+        </div>
       </div>
     )
   }

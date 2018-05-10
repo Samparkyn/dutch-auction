@@ -52,26 +52,24 @@ export class NewItem extends Component {
       : null
 
     return (
-      <div className="sell__page">
-        <p className="seller__text">What would you like to sell?</p>
-        <p>Create your item here: </p>
-        <div className="newItem__form">
-        <div className="input-fields">
-            <input 
-              value={title}
-              type="text" 
-              name="title" 
-              onChange={this.titleHandler}
-              placeholder="Title...">
-            </input>
-            <input 
-              value={startPrice}
-              type="number"
-              name="price"
-              onChange={this.priceHandler}
-              placeholder="Start price...">
-            </input>
-          </div>
+      <div className="new-item__page">
+        <div className="item__card">
+          <p>What would you like to sell?</p>
+          <p>Create your item here: </p>
+          <input 
+            value={title}
+            type="text" 
+            name="title" 
+            onChange={this.titleHandler}
+            placeholder="Title...">
+          </input>
+          <input 
+            value={startPrice}
+            type="number"
+            name="price"
+            onChange={this.priceHandler}
+            placeholder="Start price...">
+          </input>
           <button
             className="btn"
             disabled={error} 

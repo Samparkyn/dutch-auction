@@ -1,3 +1,8 @@
+:root {
+  --button-active-color: #0074D9;
+  --standard-spacing: 10px;
+}
+
 .App {
   text-align: center;
 }
@@ -16,4 +21,19 @@
   font-size: 18px;	
   text-decoration: none;
   margin: 15px;
+}
+
+button {
+  max-width: 100px;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+button.active {
+  color: white;
+  background-color: var(--button-active-color);
+}
+
+button + button {
+  margin-left: var(--standard-spacing);
 }

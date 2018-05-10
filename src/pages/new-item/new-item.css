@@ -1,31 +1,7 @@
-.newItem__form {
-  width: 300px;
-  height: 300px;
-  box-shadow: 2px 2px 12px 0 rgba(0,0,0,.15);
-  display: inline-block;
-  /* background: linear-gradient(#8CA6DB, #B993D6); */
-
+.new-item__page {
+  display: flex;
+  justify-content: center;
 }
-
-input {
-  height:40px;
-  margin-top: 20px;
-  font-size: 14px;
-}
-
-.btn {	
-  box-shadow: 0 3px 12px 0 rgba(0,0,0,0.5);
-  font-size: 14px;
-  border-radius: 5px;
-  border: none;
-  margin-top: 20px;
-  height: 30px;
-}
-
-.btn:hover {
-  background: skyblue;
-}
-
 
 
 

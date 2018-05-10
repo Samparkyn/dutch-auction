@@ -2,9 +2,16 @@
 @import url('./pages/new-item/new-item.css');
 @import url('./components/item-card/item-card.css');
 @import url('./pages/home/home.css');
+@import url('./pages/item/item.css');
 
+p,
+a,
 body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+}
+
+input {
+  height: 25px;
 }
