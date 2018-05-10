@@ -74,7 +74,7 @@ export class Item extends Component {
     )
 
     return (
-      <div>
+      <div className="">
         <div>{item.title}</div>
         <div>{item.price}</div>
         {item.active ? bidInput : auctionOverDetails}

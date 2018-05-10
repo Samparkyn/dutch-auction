@@ -20,6 +20,7 @@ export class NewItem extends Component {
   addItem = () => {
     const title = this.state.title
     const startPrice = parseFloat(this.state.startPrice)
+    const { history, createNewItem } = this.props
 
     if (!title || !startPrice) {
       this.setState({ error: 'Please complete both fields' })
@@ -37,11 +38,13 @@ export class NewItem extends Component {
       duration: constants.DEFAULT_AUCTION_TIME
     };
 
-    this.props.createNewItem(newItem)
+    createNewItem(newItem)
+    history.push('/')
   }
-
-
+  
+  
   render() {
+    console.log(this.props)
     const { error, title, startPrice } = this.state
 
     const errorMessage = error 
@@ -49,25 +52,32 @@ export class NewItem extends Component {
       : null
 
     return (
-      <div className="seller">
-        <p className="seller__text">What would you like to sell? Create your item here: </p>
-        <div className="newItem__form__container">
-          <input 
-            value={title}
-            type="text" 
-            name="title" 
-            onChange={this.titleHandler}
-            placeholder="Title...">
-          </input>
-          <input
-            value={startPrice}
-            type="number"
-            name="price"
-            onChange={this.priceHandler}
-            placeholder="Start price...">
-          </input>
-          <button disabled={error} onClick={this.addItem}>
-            <Link to="/">Save</Link>
+      <div className="sell__page">
+        <p className="seller__text">What would you like to sell?</p>
+        <p>Create your item here: </p>
+        <div className="newItem__form">
+        <div className="input-fields">
+            <input 
+              value={title}
+              type="text" 
+              name="title" 
+              onChange={this.titleHandler}
+              placeholder="Title...">
+            </input>
+            <input 
+              value={startPrice}
+              type="number"
+              name="price"
+              onChange={this.priceHandler}
+              placeholder="Start price...">
+            </input>
+          </div>
+          <button
+            className="btn"
+            disabled={error} 
+            onClick={this.addItem}
+          >
+            Submit
           </button>
           {errorMessage}
         </div>

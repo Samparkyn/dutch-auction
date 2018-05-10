@@ -1,11 +1,10 @@
-.item__container {
-display: block;
+.items__list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: flex-start;
 }
 
-.list__item {
-  height: 150px;
-  width: 150px;
-  border: solid 1px black;
-  list-style: none;
-  display: inline-block
+.item__link {
+  text-decoration: none;
 }
