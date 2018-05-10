@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getItems, getUsername } from './utils/mock-data';
+import { getItems } from './utils/mock-data';
 
 class AppState extends Component {
   state = {

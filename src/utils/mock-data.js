@@ -114,7 +114,3 @@ export const getItems = () => {
     },
   ]
 }
-
-export const getUsername = () => {
-  return 'sam'
-}

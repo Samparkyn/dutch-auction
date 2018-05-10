@@ -53,12 +53,19 @@ export class ItemsList extends Component {
       </Link>
     ))
 
+    const activeButtonClassname = this.state.filter === 'active' ? 'active' : ''
+    const completedButtonClassname = this.state.filter === 'completed' ? 'active' : ''
+    const allButtonClassname = this.state.filter === 'all' ? 'active' : ''
+
     return (
-      <div className="items__list">
-        <button onClick={this.showActiveItems}>Active</button>
-        <button onClick={this.showCompletedItems}>Completed</button>
-        <button onClick={this.showAllItems}>All</button>
-        {itemCards}
+      <div>
+        <p>Filter Auctions:</p>
+        <button className={activeButtonClassname} onClick={this.showActiveItems}>Active</button>
+        <button className={completedButtonClassname} onClick={this.showCompletedItems}>Completed</button>
+        <button className={allButtonClassname} onClick={this.showAllItems}>All</button>
+        <div className="items__list">
+          {itemCards}
+        </div>
       </div>
     )
   }

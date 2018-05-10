@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
-
 
 export class Item extends Component {
   state = {
@@ -74,7 +72,7 @@ export class Item extends Component {
     )
 
     return (
-      <div className="">
+      <div className="item__card">
         <div>{item.title}</div>
         <div>{item.price}</div>
         {item.active ? bidInput : auctionOverDetails}
