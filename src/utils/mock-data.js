@@ -31,7 +31,7 @@ export const getItems = () => {
     {
       id: Date.now() - 120938,
       bids: [],
-      title: 'Trousers with holes in them',
+      title: 'Ipad 2',
       price: 400,
       startPrice: 400,
       start: subtractTime(Date.now(), 0),
@@ -48,9 +48,9 @@ export const getItems = () => {
           start: subtractTime(Date.now(), 1000 - 120),
         }
       ],
-      title: 'Piece of paper',
-      price: 80,
-      startPrice: 100,
+      title: 'Road bike',
+      price: 580,
+      startPrice: 500,
       start: subtractTime(Date.now(), 1000),
       active: false,
       winner: {
@@ -74,7 +74,7 @@ export const getItems = () => {
           start: subtractTime(Date.now(), 65),
         }
       ],
-      title: 'Fluffy slippers',
+      title: 'Downhill all mountain skis',
       price: 800,
       startPrice: 1000,
       start: subtractTime(Date.now(), 60),
@@ -95,9 +95,9 @@ export const getItems = () => {
           start: subtractTime(Date.now(), 135),
         }
       ],
-      title: 'Pair of old skis',
+      title: 'Head Ski boots',
       price: 640,
-      startPrice: 1000,
+      startPrice: 600,
       start: subtractTime(Date.now(), 180),
       active: true,
       duration: constants.DEFAULT_AUCTION_TIME
@@ -105,9 +105,9 @@ export const getItems = () => {
     {
       id: Date.now() - 8,
       bids: [],
-      title: 'Blue apple',
-      price: 1,
-      startPrice: 1000,
+      title: 'Wilson tennis bag',
+      price: 100,
+      startPrice: 100,
       start: subtractTime(Date.now(), 12000),
       active: false,
       duration: constants.DEFAULT_AUCTION_TIME
