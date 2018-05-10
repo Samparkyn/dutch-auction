@@ -66,9 +66,12 @@ export class Timer extends Component {
   render() {
     const { time: { minutes, seconds } } = this.state
 
+    const minutesEl = <span className="timer__detail">M</span>
+    const secondsEl = <span className="timer__detail">S</span>
+
     return (
       <div className="timer__container">
-        {minutes}M : {seconds}S
+        {minutes}{minutesEl} : {seconds}{secondsEl}
       </div>
     )
   }

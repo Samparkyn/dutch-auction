@@ -45,7 +45,6 @@ export class ItemsList extends Component {
   }
 
   render() {
-    console.log(this.props, this.state)
     const { filteredItems } = this.state
     const itemCards = filteredItems.map(item => (
       <Link className="item__link" key={item.id} to={`/item/${item.id}`}>

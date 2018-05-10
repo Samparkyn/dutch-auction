@@ -13,7 +13,17 @@
   box-shadow: 0 2px 10px 0 rgba(0,0,0,0.5);
   display: flex;
   justify-content: center;
+  position: relative;
 }
+
+
+.app__nav__login {
+  color: white;
+  position: absolute;
+  right: var(--standard-spacing);
+  top: var(--standard-spacing);
+}
+
 
 .nav__link {
   width: 122px;
@@ -36,4 +46,8 @@ button.active {
 
 button + button {
   margin-left: var(--standard-spacing);
+}
+
+.error-message {
+  color: red;
 }

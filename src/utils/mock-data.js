@@ -5,30 +5,31 @@ const subtractTime = (timeInMS, seconds) => {
   return timeInMS - secondsInMS
 }
 
+export const olivia = {
+  username: 'Olivia',
+  userId: 1
+}
+
+export const kate = {
+  username: 'Kate',
+  userId: 2
+}
+
+export const sam = {
+  username: 'Sam',
+  userId: 3
+}
+
+export const john = {
+  username: 'John',
+  userId: 4
+}
 
 export const getItems = () => {
-  const olivia = {
-    username: 'Olivia',
-    userId: 1
-  }
-
-  const kate = {
-    username: 'Kate',
-    userId: 2
-  }
-
-  const sam = {
-    username: 'Sam',
-    userId: 3
-  }
-
-  const john = {
-    username: 'John',
-    userId: 4
-  }
 
   return [
     {
+      ...olivia,
       id: Date.now() - 120938,
       bids: [],
       title: 'Ipad 2',
@@ -40,6 +41,7 @@ export const getItems = () => {
       duration: constants.DEFAULT_AUCTION_TIME
     },
     {
+      ...john,
       id: Date.now() - 1,
       bids: [
         {
@@ -61,6 +63,7 @@ export const getItems = () => {
       duration: constants.DEFAULT_AUCTION_TIME
     },
     {
+      ...sam,
       id: Date.now() - 2,
       bids: [
         {
@@ -82,6 +85,7 @@ export const getItems = () => {
       duration: constants.DEFAULT_AUCTION_TIME
     },
     {
+      ...kate,
       id: Date.now() - 3,
       bids: [
         {
@@ -103,6 +107,7 @@ export const getItems = () => {
       duration: constants.DEFAULT_AUCTION_TIME
     },
     {
+      ...sam,
       id: Date.now() - 8,
       bids: [],
       title: 'Wilson tennis bag',
