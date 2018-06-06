@@ -1,5 +1,7 @@
 Dutch Auction - Sam
 
+This is a Dutch auction style app where users are able to add new items to auction, as well as see all current auctions and place bids. There is mock data so that there are always some current auctions when the app starts. Auctions run for 5 minutes ans the price decreases by 25% after each minute passed. This was a fun little project built using react :) 
+
 ### Instructions
 1. `yarn` to install dependencies
 2. `yarn start` to run the app locally
